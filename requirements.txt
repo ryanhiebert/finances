@@ -1,2 +1,4 @@
 Django==1.6.1
 South==0.8.4
+dj-database-url==0.2.2
+psycopg2==2.5.1
