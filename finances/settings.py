@@ -2,10 +2,22 @@ import os
 import dj_database_url
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-SECRET_KEY = '3rmsq&0_h1268oez89mpgd)%3b0mnd54(sx#!m#jw&k_0^^3^e'
-DEBUG = True
-TEMPLATE_DEBUG = True
-ALLOWED_HOSTS = []
+if os.environ.get('ADMINS', None):
+    ADMINS = tuple(
+        tuple(x.split(',')) for x in os.environ.get('ADMINS').split(';'))
+else:
+    ADMINS = None
+DEBUG = TEMPLATE_DEBUG = not ADMINS
+MANAGERS = ADMINS
+
+if os.environ.get('SECURE_PROXY_SSL_HEADER', None):
+    SECURE_PROXY_SSL_HEADER = tuple(
+        os.environ.get('SECURE_PROXY_SSL_HEADER').split(',')) or None
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+SECRET_KEY = os.environ.get('SECRET_KEY', '')
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = (
     'django.contrib.admin',
