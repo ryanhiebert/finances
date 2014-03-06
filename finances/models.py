@@ -30,12 +30,14 @@ class Account(models.Model):
     type = models.CharField(max_length=2) # 'Dr' or 'Cr'
 
 class Transaction(models.Model):
-    pass
+    date = models.DateField()
+    payee = models.CharField(max_length=256, null=True, blank=True)
+    memo = models.CharField(max_length=256, default='', blank=True)
 
 class Entry(models.Model):
     transaction = models.ForeignKey(Transaction, related_name='entries')
-    payee = models.CharField(max_length=256, null=True, blank=True)
     account = models.ForeignKey(Account, related_name='entries')
     category = models.ForeignKey(Category, related_name='entries')
     type = models.CharField(max_length=2) # 'Dr' or 'Cr'
     amount = models.DecimalField(max_digits=32, decimal_places=2)
+    memo = models.CharField(max_length=256, default='', blank=True)
