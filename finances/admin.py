@@ -5,23 +5,19 @@ class AllotmentInline(admin.TabularInline):
     model = Allotment
     extra = 2
 
-class AccountInline(admin.TabularInline):
-    model = Account
-    extra = 2
-
 class EntryInline(admin.TabularInline):
     model = Entry
     extra = 2
 
 class JournalAdmin(admin.ModelAdmin):
-    inlines = (AccountInline,)
+    pass
 
 class BudgetAdmin(admin.ModelAdmin):
     list_display = ('journal', 'start', 'stop')
     inlines = (AllotmentInline,)
 
 class AccountAdmin(admin.ModelAdmin):
-    list_display = ('journal', 'name', 'type')
+    list_display = ('name', 'type')
     inlines = (EntryInline,)
 
 admin.site.register(Journal, JournalAdmin)
