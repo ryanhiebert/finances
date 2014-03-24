@@ -16,7 +16,7 @@ if os.environ.get('SECURE_PROXY_SSL_HEADER', None):
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
-SECRET_KEY = os.environ.get('SECRET_KEY', '')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'not-a-secret')
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = (
